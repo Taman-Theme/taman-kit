@@ -27,11 +27,43 @@ use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Color;
 use Elementor\Scheme_Typography;
 
-
 /**
  * Buttons Widget
  */
 class Buttons extends \Elementor\Widget_Base {
+
+	/**
+	 * Widget base constructor.
+	 *
+	 * Initializing the widget base class.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @param array      $data Widget data. Default is an empty array.
+	 * @param array|null $args Optional. Widget default arguments. Default is null.
+	 */
+	public function __construct( $data = array(), $args = null ) {
+		parent::__construct( $data, $args );
+
+		wp_register_style(
+			'taman-buttons',
+			TAMAN_KIT_URL . 'public/css/widgets/buttons.css',
+			array(),
+			\TamanKitHelpers::taman_kit_ver(),
+			'all'
+		);
+	}
+
+	/**
+	 * Get style dependencies.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
+	public function get_style_depends() {
+		return array( 'taman-buttons' );
+	}
 
 	/**
 	 * Get widget name.
@@ -72,7 +104,7 @@ class Buttons extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-button';
+		return 'taman-kit-editor-icon eicon-button';
 	}
 
 	/**
@@ -105,7 +137,7 @@ class Buttons extends \Elementor\Widget_Base {
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
 	 *
-	 * @since 2.1.3
+	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() {
@@ -123,7 +155,7 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_list',
 			array(
-				'label' => __( 'Buttons', 'taman-kit' ),
+				'label' => esc_html__( 'Buttons', 'taman-kit' ),
 			)
 		);
 		$repeater = new Repeater();
@@ -133,17 +165,17 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->start_controls_tab(
 				'button_general',
 				array(
-					'label' => __( 'Content', 'taman-kit' ),
+					'label' => esc_html__( 'Content', 'taman-kit' ),
 				)
 			);
 
 			$repeater->add_control(
 				'text',
 				array(
-					'label'       => __( 'Text', 'taman-kit' ),
+					'label'       => esc_html__( 'Text', 'taman-kit' ),
 					'type'        => Controls_Manager::TEXT,
-					'default'     => __( 'Button #1', 'taman-kit' ),
-					'placeholder' => __( 'Button #1', 'taman-kit' ),
+					'default'     => esc_html__( 'Button #1', 'taman-kit' ),
+					'placeholder' => esc_html__( 'Button #1', 'taman-kit' ),
 					'dynamic'     => array(
 						'active' => true,
 					),
@@ -152,7 +184,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'tk_icon_type',
 				array(
-					'label'       => __( 'Icon Type', 'taman-kit' ),
+					'label'       => esc_html__( 'Icon Type', 'taman-kit' ),
 					'type'        => Controls_Manager::CHOOSE,
 					'label_block' => false,
 					'toggle'      => false,
@@ -180,7 +212,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'selected_icon',
 				array(
-					'label'            => __( 'Icon', 'taman-kit' ),
+					'label'            => esc_html__( 'Icon', 'taman-kit' ),
 					'type'             => Controls_Manager::ICONS,
 					'label_block'      => true,
 					'default'          => array(
@@ -196,7 +228,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'icon_img',
 				array(
-					'label'       => __( 'Image', 'taman-kit' ),
+					'label'       => esc_html__( 'Image', 'taman-kit' ),
 					'label_block' => true,
 					'type'        => Controls_Manager::MEDIA,
 					'default'     => array(
@@ -214,7 +246,7 @@ class Buttons extends \Elementor\Widget_Base {
 				Group_Control_Image_Size::get_type(),
 				array(
 					'name'      => 'icon_img',
-					'label'     => __( 'Image Size', 'taman-kit' ),
+					'label'     => esc_html__( 'Image Size', 'taman-kit' ),
 					'default'   => 'full',
 					'condition' => array(
 						'tk_icon_type' => 'image',
@@ -224,10 +256,10 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'icon_text',
 				array(
-					'label'       => __( 'Icon Text', 'taman-kit' ),
+					'label'       => esc_html__( 'Icon Text', 'taman-kit' ),
 					'label_block' => false,
 					'type'        => Controls_Manager::TEXT,
-					'default'     => __( '1', 'taman-kit' ),
+					'default'     => esc_html__( '1', 'taman-kit' ),
 					'dynamic'     => array(
 						'active' => true,
 					),
@@ -240,21 +272,21 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'has_tooltip',
 				array(
-					'label'   => __( 'Enable Tooltip', 'taman-kit' ),
+					'label'   => esc_html__( 'Enable Tooltip', 'taman-kit' ),
 					'type'    => Controls_Manager::SWITCHER,
 					'default' => 'no',
-					'yes'     => __( 'Yes', 'taman-kit' ),
-					'no'      => __( 'No', 'taman-kit' ),
+					'yes'     => esc_html__( 'Yes', 'taman-kit' ),
+					'no'      => esc_html__( 'No', 'taman-kit' ),
 				)
 			);
 
 			$repeater->add_control(
 				'tooltip_content',
 				array(
-					'label'       => __( 'Tooltip Content', 'taman-kit' ),
+					'label'       => esc_html__( 'Tooltip Content', 'taman-kit' ),
 					'type'        => Controls_Manager::TEXTAREA,
-					'default'     => __( 'I am a tooltip for a button', 'taman-kit' ),
-					'placeholder' => __( 'I am a tooltip for a button', 'taman-kit' ),
+					'default'     => esc_html__( 'I am a tooltip for a button', 'taman-kit' ),
+					'placeholder' => esc_html__( 'I am a tooltip for a button', 'taman-kit' ),
 					'rows'        => 5,
 					'condition'   => array(
 						'has_tooltip' => 'yes',
@@ -265,31 +297,31 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'link',
 				array(
-					'label'       => __( 'Link', 'taman-kit' ),
+					'label'       => esc_html__( 'Link', 'taman-kit' ),
 					'type'        => Controls_Manager::URL,
 					'dynamic'     => array(
 						'active' => true,
 					),
 					'label_block' => true,
-					'placeholder' => __( 'http://your-link.com', 'taman-kit' ),
+					'placeholder' => esc_html__( 'http://your-link.com', 'taman-kit' ),
 				)
 			);
 
 			$repeater->add_control(
 				'css_style_classes',
 				array(
-					'label'       => __( 'Style', 'taman-kit' ),
-					'title'       => __( 'Chosse Custom Butoon Style', 'taman-kit' ),
+					'label'       => esc_html__( 'Style', 'taman-kit' ),
+					'title'       => esc_html__( 'Chosse Custom Butoon Style', 'taman-kit' ),
 					'label_block' => false,
 					'type'        => Controls_Manager::SELECT,
 					'default'     => 'style1',
 					'options'     => array(
-						'style1' => __( 'Style 1', 'taman-kit' ),
-						'style2' => __( 'Style 2', 'taman-kit' ),
-						'style3' => __( 'Style 3', 'taman-kit' ),
-						'style4' => __( 'Style 4', 'taman-kit' ),
-						'style5' => __( 'Style 5', 'taman-kit' ),
-						'style6' => __( 'Style 6', 'taman-kit' ),
+						'style1' => esc_html__( 'Style 1', 'taman-kit' ),
+						'style2' => esc_html__( 'Style 2', 'taman-kit' ),
+						'style3' => esc_html__( 'Style 3', 'taman-kit' ),
+						'style4' => esc_html__( 'Style 4', 'taman-kit' ),
+						'style5' => esc_html__( 'Style 5', 'taman-kit' ),
+						'style6' => esc_html__( 'Style 6', 'taman-kit' ),
 					),
 					'dynamic'     => array(
 						'active' => true,
@@ -300,8 +332,8 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'css_id',
 				array(
-					'label'       => __( 'CSS ID', 'taman-kit' ),
-					'title'       => __( 'Add your custom ID WITHOUT the # key. e.g: my-id', 'taman-kit' ),
+					'label'       => esc_html__( 'CSS ID', 'taman-kit' ),
+					'title'       => esc_html__( 'Add your custom ID WITHOUT the # key. e.g: my-id', 'taman-kit' ),
 					'label_block' => false,
 					'type'        => Controls_Manager::TEXT,
 					'dynamic'     => array(
@@ -312,8 +344,8 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'css_classes',
 				array(
-					'label'       => __( 'CSS Classes', 'taman-kit' ),
-					'title'       => __( 'Add your custom class WITHOUT the dot. e.g: my-class', 'taman-kit' ),
+					'label'       => esc_html__( 'CSS Classes', 'taman-kit' ),
+					'title'       => esc_html__( 'Add your custom class WITHOUT the dot. e.g: my-class', 'taman-kit' ),
 					'label_block' => false,
 					'type'        => Controls_Manager::TEXT,
 					'dynamic'     => array(
@@ -327,24 +359,24 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->start_controls_tab(
 				'button_layout_tab',
 				array(
-					'label' => __( 'Layout', 'taman-kit' ),
+					'label' => esc_html__( 'Layout', 'taman-kit' ),
 				)
 			);
 
 			$repeater->add_control(
 				'single_button_size',
 				array(
-					'label'   => __( 'Button Size', 'taman-kit' ),
+					'label'   => esc_html__( 'Button Size', 'taman-kit' ),
 					'type'    => Controls_Manager::SELECT,
 					'default' => 'default',
 					'options' => array(
-						'default' => __( 'Default', 'taman-kit' ),
-						'xs'      => __( 'Extra Small', 'taman-kit' ),
-						'sm'      => __( 'Small', 'taman-kit' ),
-						'md'      => __( 'Medium', 'taman-kit' ),
-						'lg'      => __( 'Large', 'taman-kit' ),
-						'xl'      => __( 'Extra Large', 'taman-kit' ),
-						'custom'  => __( 'Custom', 'taman-kit' ),
+						'default' => esc_html__( 'Default', 'taman-kit' ),
+						'xs'      => esc_html__( 'Extra Small', 'taman-kit' ),
+						'sm'      => esc_html__( 'Small', 'taman-kit' ),
+						'md'      => esc_html__( 'Medium', 'taman-kit' ),
+						'lg'      => esc_html__( 'Large', 'taman-kit' ),
+						'xl'      => esc_html__( 'Extra Large', 'taman-kit' ),
+						'custom'  => esc_html__( 'Custom', 'taman-kit' ),
 					),
 				)
 			);
@@ -352,7 +384,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_responsive_control(
 				'single_button_width',
 				array(
-					'label'      => __( 'Button Width', 'taman-kit' ),
+					'label'      => esc_html__( 'Button Width', 'taman-kit' ),
 					'type'       => Controls_Manager::SLIDER,
 					'size_units' => array( 'px', '%' ),
 					'range'      => array(
@@ -374,7 +406,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_responsive_control(
 				'single_button_padding',
 				array(
-					'label'      => __( 'Padding', 'taman-kit' ),
+					'label'      => esc_html__( 'Padding', 'taman-kit' ),
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => array( 'px', 'em', '%' ),
 					'selectors'  => array(
@@ -388,7 +420,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->start_controls_tab(
 				'button_style_tabs',
 				array(
-					'label' => __( 'Style', 'taman-kit' ),
+					'label' => esc_html__( 'Style', 'taman-kit' ),
 				)
 			);
 
@@ -396,7 +428,7 @@ class Buttons extends \Elementor\Widget_Base {
 				Group_Control_Typography::get_type(),
 				array(
 					'name'     => 'single_title_typography',
-					'label'    => __( 'Button Typography', 'taman-kit' ),
+					'label'    => esc_html__( 'Button Typography', 'taman-kit' ),
 					'scheme'   => Scheme_Typography::TYPOGRAPHY_4,
 					'selector' => '{{WRAPPER}} {{CURRENT_ITEM}}.tk-button .tk-button-title',
 				)
@@ -405,7 +437,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_responsive_control(
 				'single_icon_size',
 				array(
-					'label'     => __( 'Icon Size', 'taman-kit' ),
+					'label'     => esc_html__( 'Icon Size', 'taman-kit' ),
 					'type'      => Controls_Manager::SLIDER,
 					'range'     => array(
 						'px' => array(
@@ -427,7 +459,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'single_normal_options',
 				array(
-					'label'     => __( 'Normal', 'taman-kit' ),
+					'label'     => esc_html__( 'Normal', 'taman-kit' ),
 					'type'      => Controls_Manager::HEADING,
 					'separator' => 'after',
 				)
@@ -435,7 +467,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'single_button_bg_color',
 				array(
-					'label'     => __( 'Background Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Background Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -447,7 +479,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'single_text_color',
 				array(
-					'label'     => __( 'Text Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Text Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -458,7 +490,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'single_icon_color',
 				array(
-					'label'     => __( 'Icon Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Icon Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -471,7 +503,7 @@ class Buttons extends \Elementor\Widget_Base {
 				Group_Control_Border::get_type(),
 				array(
 					'name'        => 'single_button_border',
-					'label'       => __( 'Border', 'taman-kit' ),
+					'label'       => esc_html__( 'Border', 'taman-kit' ),
 					'placeholder' => '1px',
 					'default'     => '1px',
 					'selector'    => '{{WRAPPER}} {{CURRENT_ITEM}}.tk-button',
@@ -480,7 +512,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'single_button_border_radius',
 				array(
-					'label'      => __( 'Border Radius', 'taman-kit' ),
+					'label'      => esc_html__( 'Border Radius', 'taman-kit' ),
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => array( 'px', '%' ),
 					'selectors'  => array(
@@ -494,7 +526,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'single_hover_options',
 				array(
-					'label'     => __( 'Hover', 'taman-kit' ),
+					'label'     => esc_html__( 'Hover', 'taman-kit' ),
 					'type'      => Controls_Manager::HEADING,
 					'separator' => 'after',
 				)
@@ -503,7 +535,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'single_button_bg_color_hover',
 				array(
-					'label'     => __( 'Background Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Background Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -515,7 +547,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'single_text_color_hover',
 				array(
-					'label'     => __( 'Text Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Text Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -527,7 +559,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'single_icon_color_hover',
 				array(
-					'label'     => __( 'Icon Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Icon Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -540,7 +572,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$repeater->add_control(
 				'single_border_color_hover',
 				array(
-					'label'     => __( 'Border Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Border Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -556,17 +588,17 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->add_control(
 			'buttons',
 			array(
-				'label'       => __( 'Buttons', 'taman-kit' ),
+				'label'       => esc_html__( 'Buttons', 'taman-kit' ),
 				'type'        => Controls_Manager::REPEATER,
 				'show_label'  => true,
 				'fields'      => $repeater->get_controls(),
 				'title_field' => '{{{ text }}}',
 				'default'     => array(
 					array(
-						'text' => __( 'Button #1', 'taman-kit' ),
+						'text' => esc_html__( 'Button #1', 'taman-kit' ),
 					),
 					array(
-						'text' => __( 'Button #2', 'taman-kit' ),
+						'text' => esc_html__( 'Button #2', 'taman-kit' ),
 					),
 				),
 			)
@@ -577,7 +609,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->start_controls_section(
 				'section_upgrade_tamankit',
 				array(
-					'label' => apply_filters( 'upgrade_tamankit_title', __( 'Get Tamankit Pro', 'taman-kit' ) ),
+					'label' => taman_kit_massage_active( 'title' ),
 					'tab'   => Controls_Manager::TAB_CONTENT,
 				)
 			);
@@ -587,8 +619,7 @@ class Buttons extends \Elementor\Widget_Base {
 				array(
 					'label'           => '',
 					'type'            => Controls_Manager::RAW_HTML,
-					/* translators: draft saved date format, see http://php.net/date */
-					'raw'             => apply_filters( 'upgrade_tamankit_message', sprintf( __( 'Upgrade to %1$s Pro Version %2$s for 70+ widgets, exciting extensions and advanced features.', 'taman-kit' ), '<a href="#" target="_blank" rel="noopener">', '</a>' ) ),
+					'raw'             => taman_kit_massage_active( 'massage' ),
 					'content_classes' => 'upgrade-tamankit-notice elementor-panel-alert elementor-panel-alert-info',
 				)
 			);
@@ -607,29 +638,29 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'button_layout',
 			array(
-				'label' => __( 'Layout', 'taman-kit' ),
+				'label' => esc_html__( 'Layout', 'taman-kit' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
 		$this->add_control(
 			'button_size',
 			array(
-				'label'   => __( 'Buttons Size', 'taman-kit' ),
+				'label'   => esc_html__( 'Buttons Size', 'taman-kit' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'sm',
 				'options' => array(
-					'xs' => __( 'Extra Small', 'taman-kit' ),
-					'sm' => __( 'Small', 'taman-kit' ),
-					'md' => __( 'Medium', 'taman-kit' ),
-					'lg' => __( 'Large', 'taman-kit' ),
-					'xl' => __( 'Extra Large', 'taman-kit' ),
+					'xs' => esc_html__( 'Extra Small', 'taman-kit' ),
+					'sm' => esc_html__( 'Small', 'taman-kit' ),
+					'md' => esc_html__( 'Medium', 'taman-kit' ),
+					'lg' => esc_html__( 'Large', 'taman-kit' ),
+					'xl' => esc_html__( 'Extra Large', 'taman-kit' ),
 				),
 			)
 		);
 		$this->add_responsive_control(
 			'button_spacing',
 			array(
-				'label'     => __( 'Buttons Spacing', 'taman-kit' ),
+				'label'     => esc_html__( 'Buttons Spacing', 'taman-kit' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => array(
 					'size' => 10,
@@ -651,24 +682,24 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'vertical_align',
 			array(
-				'label'        => __( 'Vertical Alignment', 'taman-kit' ),
+				'label'        => esc_html__( 'Vertical Alignment', 'taman-kit' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'default'      => 'middle',
 				'options'      => array(
 					'top'     => array(
-						'title' => __( 'Top', 'taman-kit' ),
+						'title' => esc_html__( 'Top', 'taman-kit' ),
 						'icon'  => 'eicon-v-align-top',
 					),
 					'middle'  => array(
-						'title' => __( 'Middle', 'taman-kit' ),
+						'title' => esc_html__( 'Middle', 'taman-kit' ),
 						'icon'  => 'eicon-v-align-middle',
 					),
 					'bottom'  => array(
-						'title' => __( 'Bottom', 'taman-kit' ),
+						'title' => esc_html__( 'Bottom', 'taman-kit' ),
 						'icon'  => 'eicon-v-align-bottom',
 					),
 					'stretch' => array(
-						'title' => __( 'Stretch', 'taman-kit' ),
+						'title' => esc_html__( 'Stretch', 'taman-kit' ),
 						'icon'  => 'eicon-v-align-stretch',
 					),
 				),
@@ -679,24 +710,24 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'button_align',
 			array(
-				'label'        => __( 'Horizontal Alignment', 'taman-kit' ),
+				'label'        => esc_html__( 'Horizontal Alignment', 'taman-kit' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'default'      => 'left',
 				'options'      => array(
 					'left'    => array(
-						'title' => __( 'Left', 'taman-kit' ),
+						'title' => esc_html__( 'Left', 'taman-kit' ),
 						'icon'  => 'eicon-h-align-left',
 					),
 					'center'  => array(
-						'title' => __( 'Center', 'taman-kit' ),
+						'title' => esc_html__( 'Center', 'taman-kit' ),
 						'icon'  => 'eicon-h-align-center',
 					),
 					'right'   => array(
-						'title' => __( 'Right', 'taman-kit' ),
+						'title' => esc_html__( 'Right', 'taman-kit' ),
 						'icon'  => 'eicon-h-align-right',
 					),
 					'stretch' => array(
-						'title' => __( 'Stretch', 'taman-kit' ),
+						'title' => esc_html__( 'Stretch', 'taman-kit' ),
 						'icon'  => 'eicon-h-align-stretch',
 					),
 				),
@@ -707,24 +738,24 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'content_align',
 			array(
-				'label'                => __( 'Content Alignment', 'taman-kit' ),
+				'label'                => esc_html__( 'Content Alignment', 'taman-kit' ),
 				'type'                 => Controls_Manager::CHOOSE,
 				'default'              => 'left',
 				'options'              => array(
 					'left'    => array(
-						'title' => __( 'Left', 'taman-kit' ),
+						'title' => esc_html__( 'Left', 'taman-kit' ),
 						'icon'  => 'eicon-h-align-left',
 					),
 					'center'  => array(
-						'title' => __( 'Center', 'taman-kit' ),
+						'title' => esc_html__( 'Center', 'taman-kit' ),
 						'icon'  => 'eicon-h-align-center',
 					),
 					'right'   => array(
-						'title' => __( 'Right', 'taman-kit' ),
+						'title' => esc_html__( 'Right', 'taman-kit' ),
 						'icon'  => 'eicon-h-align-right',
 					),
 					'stretch' => array(
-						'title' => __( 'Stretch', 'taman-kit' ),
+						'title' => esc_html__( 'Stretch', 'taman-kit' ),
 						'icon'  => 'eicon-h-align-stretch',
 					),
 				),
@@ -746,15 +777,15 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->add_control(
 			'stack_on',
 			array(
-				'label'        => __( 'Stack on', 'taman-kit' ),
+				'label'        => esc_html__( 'Stack on', 'taman-kit' ),
 				'type'         => Controls_Manager::SELECT,
 				'default'      => 'none',
-				'description'  => __( 'Choose a breakpoint where the buttons will stack.', 'taman-kit' ),
+				'description'  => esc_html__( 'Choose a breakpoint where the buttons will stack.', 'taman-kit' ),
 				'options'      => array(
-					'none'    => __( 'None', 'taman-kit' ),
-					'desktop' => __( 'Desktop', 'taman-kit' ),
-					'tablet'  => __( 'Tablet', 'taman-kit' ),
-					'mobile'  => __( 'Mobile', 'taman-kit' ),
+					'none'    => esc_html__( 'None', 'taman-kit' ),
+					'desktop' => esc_html__( 'Desktop', 'taman-kit' ),
+					'tablet'  => esc_html__( 'Tablet', 'taman-kit' ),
+					'mobile'  => esc_html__( 'Mobile', 'taman-kit' ),
 				),
 				'prefix_class' => 'tk-buttons-stack-',
 			)
@@ -763,7 +794,7 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'button_padding',
 			array(
-				'label'      => __( 'Padding', 'taman-kit' ),
+				'label'      => esc_html__( 'Padding', 'taman-kit' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', 'em', '%' ),
 				'selectors'  => array(
@@ -785,7 +816,7 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_info_box_button_style',
 			array(
-				'label' => __( 'Styling', 'taman-kit' ),
+				'label' => esc_html__( 'Styling', 'taman-kit' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -793,7 +824,7 @@ class Buttons extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'button_typography',
-				'label'    => __( 'Typography', 'taman-kit' ),
+				'label'    => esc_html__( 'Typography', 'taman-kit' ),
 				'scheme'   => Scheme_Typography::TYPOGRAPHY_4,
 				'selector' => '{{WRAPPER}} .tk-button',
 			)
@@ -803,14 +834,14 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_button_normal',
 			array(
-				'label' => __( 'Normal', 'taman-kit' ),
+				'label' => esc_html__( 'Normal', 'taman-kit' ),
 			)
 		);
 
 			$this->add_control(
 				'button_bg_color_normal',
 				array(
-					'label'     => __( 'Background Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Background Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'scheme'    => array(
 						'type'  => Scheme_Color::get_type(),
@@ -825,7 +856,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->add_control(
 				'button_text_color_normal',
 				array(
-					'label'     => __( 'Text Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Text Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -837,7 +868,7 @@ class Buttons extends \Elementor\Widget_Base {
 				Group_Control_Border::get_type(),
 				array(
 					'name'        => 'button_border_normal',
-					'label'       => __( 'Border', 'taman-kit' ),
+					'label'       => esc_html__( 'Border', 'taman-kit' ),
 					'placeholder' => '1px',
 					'default'     => '1px',
 					'selector'    => '{{WRAPPER}} .tk-button',
@@ -846,7 +877,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->add_responsive_control(
 				'button_border_radius',
 				array(
-					'label'      => __( 'Border Radius', 'taman-kit' ),
+					'label'      => esc_html__( 'Border Radius', 'taman-kit' ),
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => array( 'px', '%' ),
 					'selectors'  => array(
@@ -868,14 +899,14 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_button_hover',
 			array(
-				'label' => __( 'Hover', 'taman-kit' ),
+				'label' => esc_html__( 'Hover', 'taman-kit' ),
 			)
 		);
 
 			$this->add_control(
 				'button_bg_color_hover',
 				array(
-					'label'     => __( 'Background Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Background Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -886,7 +917,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->add_control(
 				'button_text_color_hover',
 				array(
-					'label'     => __( 'Text Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Text Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -897,7 +928,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->add_control(
 				'button_border_color_hover',
 				array(
-					'label'     => __( 'Border Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Border Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -915,7 +946,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->add_control(
 				'button_animation',
 				array(
-					'label' => __( 'Animation', 'taman-kit' ),
+					'label' => esc_html__( 'Animation', 'taman-kit' ),
 					'type'  => Controls_Manager::HOVER_ANIMATION,
 				)
 			);
@@ -937,7 +968,7 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_icon_style',
 			array(
-				'label' => __( 'Icon', 'taman-kit' ),
+				'label' => esc_html__( 'Icon', 'taman-kit' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -946,7 +977,7 @@ class Buttons extends \Elementor\Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'icon_typography',
-				'label'    => __( 'Typography', 'taman-kit' ),
+				'label'    => esc_html__( 'Typography', 'taman-kit' ),
 				'scheme'   => Scheme_Typography::TYPOGRAPHY_4,
 				'selector' => '{{WRAPPER}} .tk-button-icon-number',
 			)
@@ -954,21 +985,21 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'icon_position',
 			array(
-				'label'   => __( 'Icon Position', 'taman-kit' ),
+				'label'   => esc_html__( 'Icon Position', 'taman-kit' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'before',
 				'options' => array(
-					'after'  => __( 'After', 'taman-kit' ),
-					'before' => __( 'Before', 'taman-kit' ),
-					'top'    => __( 'Top', 'taman-kit' ),
-					'bottom' => __( 'Bottom', 'taman-kit' ),
+					'after'  => esc_html__( 'After', 'taman-kit' ),
+					'before' => esc_html__( 'Before', 'taman-kit' ),
+					'top'    => esc_html__( 'Top', 'taman-kit' ),
+					'bottom' => esc_html__( 'Bottom', 'taman-kit' ),
 				),
 			)
 		);
 		$this->add_responsive_control(
 			'icon_size',
 			array(
-				'label'     => __( 'Size', 'taman-kit' ),
+				'label'     => esc_html__( 'Size', 'taman-kit' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => array(
 					'size' => '',
@@ -988,7 +1019,7 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'icon_spacing',
 			array(
-				'label'     => __( 'Spacing', 'taman-kit' ),
+				'label'     => esc_html__( 'Spacing', 'taman-kit' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => array(
 					'size' => 8,
@@ -1012,13 +1043,13 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->start_controls_tab(
 				'tab_icon_normal',
 				array(
-					'label' => __( 'Normal', 'taman-kit' ),
+					'label' => esc_html__( 'Normal', 'taman-kit' ),
 				)
 			);
 			$this->add_control(
 				'icon_color',
 				array(
-					'label'     => __( 'Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -1033,14 +1064,14 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->start_controls_tab(
 				'tab_icon_hover',
 				array(
-					'label' => __( 'Hover', 'taman-kit' ),
+					'label' => esc_html__( 'Hover', 'taman-kit' ),
 				)
 			);
 
 			$this->add_control(
 				'icon_color_hover',
 				array(
-					'label'     => __( 'Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '',
 					'selectors' => array(
@@ -1067,7 +1098,7 @@ class Buttons extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_tooltip_style',
 			array(
-				'label' => __( 'Tooltip', 'taman-kit' ),
+				'label' => esc_html__( 'Tooltip', 'taman-kit' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -1075,38 +1106,38 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->add_responsive_control(
 				'tooltips_position',
 				array(
-					'label'   => __( 'Tooltip Position', 'taman-kit' ),
+					'label'   => esc_html__( 'Tooltip Position', 'taman-kit' ),
 					'type'    => Controls_Manager::SELECT,
 					'default' => 'top',
 					'options' => array(
-						'top'          => __( 'Above', 'taman-kit' ),
-						'top-left'     => __( 'Top Left', 'taman-kit' ),
-						'top-right'    => __( 'Top Right', 'taman-kit' ),
-						'bottom'       => __( 'Bottom', 'taman-kit' ),
-						'bottom-left'  => __( 'Bottom Left', 'taman-kit' ),
-						'bottom-right' => __( 'Bottom Right', 'taman-kit' ),
-						'left'         => __( 'Left', 'taman-kit' ),
-						'right'        => __( 'Right', 'taman-kit' ),
+						'top'          => esc_html__( 'Above', 'taman-kit' ),
+						'top-left'     => esc_html__( 'Top Left', 'taman-kit' ),
+						'top-right'    => esc_html__( 'Top Right', 'taman-kit' ),
+						'bottom'       => esc_html__( 'Bottom', 'taman-kit' ),
+						'bottom-left'  => esc_html__( 'Bottom Left', 'taman-kit' ),
+						'bottom-right' => esc_html__( 'Bottom Right', 'taman-kit' ),
+						'left'         => esc_html__( 'Left', 'taman-kit' ),
+						'right'        => esc_html__( 'Right', 'taman-kit' ),
 					),
 				)
 			);
 			$this->add_control(
 				'tooltips_align',
 				array(
-					'label'     => __( 'Text Align', 'taman-kit' ),
+					'label'     => esc_html__( 'Text Align', 'taman-kit' ),
 					'type'      => Controls_Manager::CHOOSE,
 					'default'   => ' center',
 					'options'   => array(
 						'left'   => array(
-							'title' => __( 'Left', 'taman-kit' ),
+							'title' => esc_html__( 'Left', 'taman-kit' ),
 							'icon'  => 'fa fa-align-left',
 						),
 						'center' => array(
-							'title' => __( 'Center', 'taman-kit' ),
+							'title' => esc_html__( 'Center', 'taman-kit' ),
 							'icon'  => 'fa fa-align-center',
 						),
 						'right'  => array(
-							'title' => __( 'Right', 'taman-kit' ),
+							'title' => esc_html__( 'Right', 'taman-kit' ),
 							'icon'  => 'fa fa-align-right',
 						),
 					),
@@ -1118,7 +1149,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->add_responsive_control(
 				'tooltips_padding',
 				array(
-					'label'      => __( 'Padding', 'taman-kit' ),
+					'label'      => esc_html__( 'Padding', 'taman-kit' ),
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => array( 'px', 'em', '%' ),
 					'selectors'  => array(
@@ -1129,7 +1160,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->add_responsive_control(
 				'tooltips_border_radius',
 				array(
-					'label'      => __( 'Border Radius', 'taman-kit' ),
+					'label'      => esc_html__( 'Border Radius', 'taman-kit' ),
 					'type'       => Controls_Manager::DIMENSIONS,
 					'size_units' => array( 'px', '%' ),
 					'selectors'  => array(
@@ -1150,7 +1181,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->add_control(
 				'tooltips_background_color',
 				array(
-					'label'     => __( 'Background Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Background Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '#000000',
 					'selectors' => array(
@@ -1165,7 +1196,7 @@ class Buttons extends \Elementor\Widget_Base {
 			$this->add_control(
 				'tooltips_color',
 				array(
-					'label'     => __( 'Color', 'taman-kit' ),
+					'label'     => esc_html__( 'Color', 'taman-kit' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '#ffffff',
 					'selectors' => array(

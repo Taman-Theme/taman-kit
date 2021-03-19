@@ -84,6 +84,8 @@ if ( ! class_exists( 'TamanKitHelpers' ) ) {
 					$this->load_files(
 						array(
 							'includes/helpers/helpers',
+							'includes/base/global-var',
+							'includes/modules/class-templates',
 						)
 					);
 				}
@@ -113,22 +115,13 @@ if ( ! class_exists( 'TamanKitHelpers' ) ) {
 
 			wp_register_style(
 				'taman-kit-style',
-				TAMAN_KIT_URL . 'css/style.css',
-				array(),
-				$this->taman_kit_ver(),
-				'all'
-			);
-
-			wp_register_style(
-				'taman-buttons',
-				TAMAN_KIT_URL . 'css/buttons.css',
+				TAMAN_KIT_URL . 'public/css/style.css',
 				array(),
 				$this->taman_kit_ver(),
 				'all'
 			);
 
 			wp_enqueue_style( 'taman-kit-style' );
-			wp_enqueue_style( 'taman-buttons' );
 
 		}
 

@@ -1,0 +1,259 @@
+
+
+/*==========================================================*/
+a.tk-alert-close,
+.tk-modal-popup-button,
+.tk-trigger-image,
+.tk-trigger-icon,
+.tk-modal-popup-close-button{
+    cursor: pointer;
+}
+/************************************************/
+.tk-countdown {
+    -js-display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.pre_countdown-row {
+    display: block;
+    text-align: center;
+}
+
+.countdown .pre_countdown-section {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 15px;
+    -js-display: inline-flex;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -moz-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.countdown .pre_countdown-section:last-child {
+    margin-right: 0;
+}
+
+.countdown span.pre_countdown-amount {
+    font-size: 70px;
+    line-height: 1;
+}
+
+.countdown .pre_time-mid {
+    display: block;
+}
+
+.tk-countdown-separator-yes .pre-countdown_separator {
+    display: block;
+    margin: 0 50px;
+    font-size: 30px;
+}
+
+.tk-countdown-separator-yes .pre_countdown-row .pre_countdown-section:last-child .pre-countdown_separator {
+    display: none;
+}
+
+.side .pre_countdown-section .pre_countdown-period {
+    vertical-align: bottom;
+}
+
+.countdown .pre_countdown-section .pre_countdown-period {
+    font-size: 17px;
+    line-height: 3em;
+}
+
+.side .pre_countdown-section .pre_countdown-amount,
+.side .pre_countdown-section .pre_countdown-period {
+    display: inline-block;
+}
+
+.side .pre_countdown-section .pre_countdown-amount {
+    margin-right: 5px;
+}
+
+.down .pre_countdown-section .pre_countdown-amount,
+.down .pre_countdown-section .pre_countdown-period {
+    display: block;
+}
+
+/*====================================*/
+.tk-counter-area {
+    padding: 10px 0;
+    -js-display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.tk-counter-area.top {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.tk-counter-area.right {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -webkit-flex-direction: row-reverse;
+    -moz-box-orient: horizontal;
+    -moz-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+}
+
+.tk-counter-area.right .tk-counter-icon {
+    padding-left: 20px;
+}
+
+.tk-counter-area.left .tk-counter-icon {
+    padding-right: 20px;
+}
+
+.tk-counter-area .tk-counter-icon .icon i.fa:before {
+    vertical-align: text-top;
+}
+
+.tk-counter-area .tk-counter-icon span.icon {
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.tk-counter-area .tk-counter-icon .circle {
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+}
+
+.tk-counter-area .tk-counter-icon img,
+.tk-counter-area .tk-counter-icon svg {
+    width: 80px;
+}
+
+.tk-counter-area .tk-counter-icon .tk-counter-animation svg {
+    height: 80px;
+}
+
+.tk-counter-area .tk-counter-title {
+    padding: 0;
+    margin: 0;
+}
+
+.tk-counter-area .tk-counter-value-wrap {
+    -js-display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.tk-init-wrapper.right {
+    text-align: right;
+}
+
+/*======================*/
+.tk-feed--image {
+    object-fit: cover;
+    object-position: bottom;
+    font-family: 'object-fit: cover; object-position: bottom;';
+}
+
+.tk-divider-wrap {
+    font-size: 0;
+    line-height: 0;
+}
+
+.tk-divider {
+    text-align: center;
+}
+
+.tk-divider-right .divider-border-right,
+.tk-divider-left .divider-border-left {
+    display: none;
+}
+
+/**-- Horizontal --**/
+.tk-divider-horizontal {
+    border: 0;
+    border-color: #101010;
+    border-bottom-width: 4px;
+    border-top-width: 0px;
+    display: inline-block;
+    width: 80px;
+    height: 0;
+    border-style: dashed;
+}
+
+/**-- Vertical --**/
+.tk-divider-vertical {
+    border: 0;
+    display: inline-block;
+    border-left: 2px solid #101010;
+    padding-bottom: 50px;
+}
+
+/**-- divider with Text --**/
+.divider-text-container {
+    display: inline-block;
+    max-width: 100%;
+}
+
+.divider-text-wrap {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.tk-divider-text {
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.tk-divider-border-wrap {
+    flex: 1 1 auto;
+}
+
+.divider-border {
+    border: 0;
+    height: 1px;
+    border-top: 1px solid #101010;
+    display: block;
+    width: 100%;
+}
+
+.tk-divider-content {
+    display: inherit;
+    flex: 0 1 auto;
+    margin: 0 20px;
+}

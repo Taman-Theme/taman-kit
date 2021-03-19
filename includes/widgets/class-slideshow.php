@@ -1,6 +1,6 @@
 <?php
 /**
- * Elementor divider Widget.
+ * Elementor slideshow Widget.
  *
  * Elementor widget that inserts an embbedable content into the page, from any given URL.
  *
@@ -11,27 +11,31 @@
 namespace TamanKit\Widgets;
 
 // Elementor Classes.
-use Elementor\Controls_Manager;
 use Elementor\Utils;
-use Elementor\Icons_Manager;
-use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Box_Shadow;
-use Elementor\Group_Control_Text_Shadow;
+use Elementor\Widget_Base;
+use Elementor\Repeater;
+use Elementor\Scheme_Color;
+use Elementor\Controls_Manager;
+use Elementor\Scheme_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
-use Elementor\Group_Control_Image_Size;
-use Elementor\Scheme_Typography;
+use Elementor\Icons_Manager;
+use Elementor\Group_Control_Css_Filter;
+use Elementor\Group_Control_Text_Shadow;
+use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Background;
+use Elementor\Core\Responsive\Responsive;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
 
 /**
  * Undocumented class
  */
-class Divider extends \Elementor\Widget_Base {
+class Slideshow extends \Elementor\Widget_Base {
 
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve divider widget name.
+	 * Retrieve slideshow widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -39,13 +43,13 @@ class Divider extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'divider';
+		return 'slideshow';
 	}
 
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve divider widget title.
+	 * Retrieve slideshow widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -53,13 +57,13 @@ class Divider extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Divider', 'taman-kit' );
+		return esc_html__( 'Slideshow', 'taman-kit' );
 	}
 
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve divider widget icon.
+	 * Retrieve slideshow widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -73,7 +77,7 @@ class Divider extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the divider widget belongs to.
+	 * Retrieve the list of categories the slideshow widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -85,7 +89,7 @@ class Divider extends \Elementor\Widget_Base {
 	}
 
 	/**
-	 * Register divider widget controls.
+	 * Register slideshow widget controls.
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
 	 *
@@ -93,7 +97,8 @@ class Divider extends \Elementor\Widget_Base {
 	 * @access protected
 	 */
 	protected function _register_controls() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
-        /*
+
+		/*
 		*==================================================================================
 		*
 		*==================================== CONTENT TAB =================================
@@ -130,7 +135,7 @@ class Divider extends \Elementor\Widget_Base {
 					'tab'   => Controls_Manager::TAB_CONTENT,
 				)
 			);
-	
+
 			$this->add_control(
 				'upgrade_tamankit_notice',
 				array(
@@ -160,7 +165,7 @@ class Divider extends \Elementor\Widget_Base {
 
 
 
-    /*
+	/*
 	*==================================================================================
 	*
 	*=============================== Widget Output ====================================
@@ -169,7 +174,7 @@ class Divider extends \Elementor\Widget_Base {
 	*/
 
 	/**
-	 * Render divider widget output on the frontend.
+	 * Render slideshow widget output on the frontend.
 	 *
 	 * Written in PHP and used to generate the final HTML.
 	 *
@@ -179,14 +184,6 @@ class Divider extends \Elementor\Widget_Base {
 	protected function render() {
 
 		$settings = $this->get_settings_for_display();
-
-		$html = wp_divider_get( $settings['url'] );
-
-		echo '<div class="divider-elementor-widget">';
-
-		echo ( $html ) ? wp_kses_post( $html ) : esc_url( $settings['url'] );
-
-		echo '</div>';
 
 	}
 
