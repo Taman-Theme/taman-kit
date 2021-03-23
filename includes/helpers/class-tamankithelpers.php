@@ -132,13 +132,8 @@ if ( ! class_exists( 'TamanKitHelpers' ) ) {
 		 */
 		public function register_scripts() {
 
-			wp_register_script(
-				'taman_test_css',
-				TAMAN_KIT_URL . 'css/taman_test_css.css',
-				array(),
-				$this->taman_kit_ver(),
-				true
-			);
+			wp_register_script( 'taman-kit', TAMAN_KIT_URL . 'public/js/taman-kit.js', array(), self::taman_kit_ver(), true );
+
 		}
 
 

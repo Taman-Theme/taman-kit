@@ -93,7 +93,8 @@ class Divider extends \Elementor\Widget_Base {
 	 * @access protected
 	 */
 	protected function _register_controls() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
-        /*
+
+		/*
 		*==================================================================================
 		*
 		*==================================== CONTENT TAB =================================
@@ -130,7 +131,7 @@ class Divider extends \Elementor\Widget_Base {
 					'tab'   => Controls_Manager::TAB_CONTENT,
 				)
 			);
-	
+
 			$this->add_control(
 				'upgrade_tamankit_notice',
 				array(

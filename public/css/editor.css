@@ -1,21 +1,7 @@
-.elementor-element .taman-kit-editor-icon:after {
-    background: transparent;
-    padding: 0.4em 0.5em;
-    border-width: 0 0 1px 1px;
-    border-color: #ddd;
-    border-style: solid;
-    content: "TK";
-    font-family: Roboto,Arial,Helvetica,Verdana,sans-serif;
-    font-size: 10px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
-}
-button.tkb-btn.elementor-button{
-    background-color: #61ce70;
-    margin-bottom: 10px;
-}
-button.tkb-btn.elementor-button:hover{
-    background-color: #50c560;
-}
+.elementor-element .taman-kit-editor-icon:after{background:0 0;padding:.4em .5em;border-width:0 0 1px 1px;border-color:#ddd;border-style:solid;content:"TK";font-family:Roboto,Arial,Helvetica,Verdana,sans-serif;font-size:10px;position:absolute;top:0;right:0;z-index:1}
+
+button.tkb-btn.elementor-button{background-color:#61ce70;margin-bottom:10px}
+
+button.tkb-btn.elementor-button:hover{background-color:#50c560}
+
+body.elementor-editor-active .elementor.elementor-edit-mode .elementor-element.elementor-section{z-index:99}
