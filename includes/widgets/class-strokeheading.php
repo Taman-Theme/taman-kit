@@ -114,27 +114,27 @@ class StrokeHeading  extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_title',
 			array(
-				'label' => __( 'Title', 'elementor' ),
+				'label' => __( 'Title', 'taman-kit' ),
 			)
 		);
 
 		$this->add_control(
 			'title',
 			array(
-				'label'       => __( 'Title', 'elementor' ),
+				'label'       => __( 'Title', 'taman-kit' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'dynamic'     => array(
 					'active' => true,
 				),
-				'placeholder' => __( 'Enter your title', 'elementor' ),
-				'default'     => __( 'Add Your Heading Text Here', 'elementor' ),
+				'placeholder' => __( 'Enter your title', 'taman-kit' ),
+				'default'     => __( 'Add Your Heading Text Here', 'taman-kit' ),
 			)
 		);
 
 		$this->add_control(
 			'link',
 			array(
-				'label'     => __( 'Link', 'elementor' ),
+				'label'     => __( 'Link', 'taman-kit' ),
 				'type'      => Controls_Manager::URL,
 				'dynamic'   => array(
 					'active' => true,
@@ -149,16 +149,16 @@ class StrokeHeading  extends \Elementor\Widget_Base {
 		$this->add_control(
 			'size',
 			array(
-				'label'   => __( 'Size', 'elementor' ),
+				'label'   => __( 'Size', 'taman-kit' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'default',
 				'options' => array(
-					'default' => __( 'Default', 'elementor' ),
-					'small'   => __( 'Small', 'elementor' ),
-					'medium'  => __( 'Medium', 'elementor' ),
-					'large'   => __( 'Large', 'elementor' ),
-					'xl'      => __( 'XL', 'elementor' ),
-					'xxl'     => __( 'XXL', 'elementor' ),
+					'default' => __( 'Default', 'taman-kit' ),
+					'small'   => __( 'Small', 'taman-kit' ),
+					'medium'  => __( 'Medium', 'taman-kit' ),
+					'large'   => __( 'Large', 'taman-kit' ),
+					'xl'      => __( 'XL', 'taman-kit' ),
+					'xxl'     => __( 'XXL', 'taman-kit' ),
 				),
 			)
 		);
@@ -166,7 +166,7 @@ class StrokeHeading  extends \Elementor\Widget_Base {
 		$this->add_control(
 			'header_size',
 			array(
-				'label'   => __( 'HTML Tag', 'elementor' ),
+				'label'   => __( 'HTML Tag', 'taman-kit' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => array(
 					'h1'   => 'H1',
@@ -186,23 +186,23 @@ class StrokeHeading  extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'align',
 			array(
-				'label'     => __( 'Alignment', 'elementor' ),
+				'label'     => __( 'Alignment', 'taman-kit' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => array(
 					'left'    => array(
-						'title' => __( 'Left', 'elementor' ),
+						'title' => __( 'Left', 'taman-kit' ),
 						'icon'  => 'eicon-text-align-left',
 					),
 					'center'  => array(
-						'title' => __( 'Center', 'elementor' ),
+						'title' => __( 'Center', 'taman-kit' ),
 						'icon'  => 'eicon-text-align-center',
 					),
 					'right'   => array(
-						'title' => __( 'Right', 'elementor' ),
+						'title' => __( 'Right', 'taman-kit' ),
 						'icon'  => 'eicon-text-align-right',
 					),
 					'justify' => array(
-						'title' => __( 'Justified', 'elementor' ),
+						'title' => __( 'Justified', 'taman-kit' ),
 						'icon'  => 'eicon-text-align-justify',
 					),
 				),
@@ -216,7 +216,7 @@ class StrokeHeading  extends \Elementor\Widget_Base {
 		$this->add_control(
 			'view',
 			array(
-				'label'   => __( 'View', 'elementor' ),
+				'label'   => __( 'View', 'taman-kit' ),
 				'type'    => Controls_Manager::HIDDEN,
 				'default' => 'traditional',
 			)
@@ -247,15 +247,35 @@ class StrokeHeading  extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_title_style',
 			array(
-				'label' => __( 'Title', 'elementor' ),
+				'label' => __( 'Title', 'taman-kit' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_control(
+			'stroke-width',
+			array(
+				'label'      => __( 'Stroke Width', 'plugin-domain' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 1000,
+						'step' => 1,
+					),
+				),
+
+				'selectors'  => array(
+					'{{WRAPPER}} .stroke-heading-title' => '-webkit-text-stroke-width: {{SIZE}}{{UNIT}};',
+				),
 			)
 		);
 
 		$this->add_control(
 			'title_color',
 			array(
-				'label'     => __( 'Text Color', 'elementor' ),
+				'label'     => __( 'Text Color', 'taman-kit' ),
 				'type'      => Controls_Manager::COLOR,
 				'global'    => array(
 					'default' => Global_Colors::COLOR_PRIMARY,
@@ -288,10 +308,10 @@ class StrokeHeading  extends \Elementor\Widget_Base {
 		$this->add_control(
 			'blend_mode',
 			array(
-				'label'     => __( 'Blend Mode', 'elementor' ),
+				'label'     => __( 'Blend Mode', 'taman-kit' ),
 				'type'      => Controls_Manager::SELECT,
 				'options'   => array(
-					''            => __( 'Normal', 'elementor' ),
+					''            => __( 'Normal', 'taman-kit' ),
 					'multiply'    => 'Multiply',
 					'screen'      => 'Screen',
 					'overlay'     => 'Overlay',
@@ -389,8 +409,8 @@ class StrokeHeading  extends \Elementor\Widget_Base {
 		?>
 		<#
 		var title = settings.title,
-        _fill = settings.fill_onhover,
-        fill = ( 'yes' === _fill ) ? ' tamanh1-is-stroke-hover' : '';
+		_fill = settings.fill_onhover,
+		fill = ( 'yes' === _fill ) ? ' tamanh1-is-stroke-hover' : '';
 
 
 

@@ -57,7 +57,7 @@ class Slideshow extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Slideshow', 'taman-kit' );
+		return esc_html__( 'Slide Show', 'taman-kit' );
 	}
 
 	/**

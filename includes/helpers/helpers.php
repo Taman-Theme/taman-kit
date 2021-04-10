@@ -30,6 +30,10 @@ if ( TamanKitHelpers::is_active( 'elementor.php' ) ) {
 				'Slideshow',
 				'StrokeHeading',
 				'Switcher',
+				'ImageAccordion',
+				'AdvancedHeading',
+				'ScrollDown',
+				'TextRotator',
 			);
 
 			TamanKit_RegisterWidget::register_widget( $widget );
@@ -355,7 +359,7 @@ if ( ! function_exists( 'taman_kit_tooltip_animations' ) ) {
 
 if ( ! function_exists( 'taman_kit_box_shadow' ) ) {
 	/**
-	 * Taman kit taman kit tooltip animations
+	 * Taman kit taman kit Boxshadow
 	 */
 	function taman_kit_box_shadow() {
 

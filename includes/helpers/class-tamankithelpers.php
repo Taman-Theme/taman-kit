@@ -60,13 +60,13 @@ if ( ! class_exists( 'TamanKitHelpers' ) ) {
 		 */
 		public function __construct() {
 
-			$this->initialize_hooks();
-
 			if ( $this->is_active( 'elementor.php' ) ) {
 
 				add_action( 'wp_enqueue_scripts', array( $this, 'register_style' ) );
 				add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 			}
+
+			$this->initialize_hooks();
 
 		}
 
@@ -113,13 +113,15 @@ if ( ! class_exists( 'TamanKitHelpers' ) ) {
 		 */
 		public function register_style() {
 
-			wp_register_style(
-				'taman-kit-style',
-				TAMAN_KIT_URL . 'public/css/style.css',
-				array(),
-				$this->taman_kit_ver(),
-				'all'
-			);
+			wp_register_style( 'taman-kit-style', TAMAN_KIT_URL . 'public/css/style.css', array(), $this->taman_kit_ver(), 'all' );
+
+			if ( ! $this->taman_kit_themes() ) {
+
+				wp_register_style( 'taman-kit-uikit', TAMAN_KIT_URL . 'public/css/uikit/uikit.min.css', array(), $this->taman_kit_ver(), 'all' );
+				wp_enqueue_style( 'taman-kit-uikit' );
+				wp_style_add_data( 'taman-kit-uikit', 'rtl', 'replace' );
+
+			}
 
 			wp_enqueue_style( 'taman-kit-style' );
 
@@ -133,7 +135,15 @@ if ( ! class_exists( 'TamanKitHelpers' ) ) {
 		public function register_scripts() {
 
 			wp_register_script( 'taman-kit', TAMAN_KIT_URL . 'public/js/taman-kit.js', array(), self::taman_kit_ver(), true );
+			wp_register_script( 'tk-morphext', TAMAN_KIT_URL . 'public/js/morphext/morphext.min.js', array(), self::taman_kit_ver(), true );
 
+			if ( ! $this->taman_kit_themes() ) {
+				wp_register_script( 'taman-kit_uikit', TAMAN_KIT_URL . 'public/js/uikit/uikit.min.js', array(), self::taman_kit_ver(), true );
+				wp_enqueue_script( 'taman-kit_uikit' );
+
+			}
+
+			wp_enqueue_script( 'taman-kit' );
 		}
 
 
@@ -227,6 +237,23 @@ if ( ! class_exists( 'TamanKitHelpers' ) ) {
 					require_once $path;
 				}
 			}
+		}
+
+		/**
+		 * Taman themes function
+		 */
+		public function taman_kit_themes() {
+
+			$taman_theme       = wp_get_theme()->get( 'Name' );
+			$parent_theme      = wp_get_theme( get_template() );
+			$parent_theme_name = $parent_theme->get( 'Name' );
+
+			$themes = array( 'Taman', 'Idealx' );
+
+			if ( true === in_array( $taman_theme, $themes, true ) || true === in_array( $parent_theme_name, $themes, true ) ) {
+				return true;
+			}
+
 		}
 
 

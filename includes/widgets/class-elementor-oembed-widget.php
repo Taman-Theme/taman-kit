@@ -1,6 +1,6 @@
 <?php
 /**
- * Elementor divider Widget.
+ * Elementor textrotator Widget.
  *
  * Elementor widget that inserts an embbedable content into the page, from any given URL.
  *
@@ -24,14 +24,14 @@ use Elementor\Scheme_Typography;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
 
 /**
- * Undocumented class
+ * Textrotator class
  */
-class Divider extends \Elementor\Widget_Base {
+class TextRotator extends \Elementor\Widget_Base {
 
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve divider widget name.
+	 * Retrieve textrotator widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -39,13 +39,13 @@ class Divider extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'divider';
+		return 'tk-textrotator';
 	}
 
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve divider widget title.
+	 * Retrieve textrotator widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -53,13 +53,13 @@ class Divider extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Divider', 'taman-kit' );
+		return esc_html__( 'Textrotator', 'taman-kit' );
 	}
 
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve divider widget icon.
+	 * Retrieve textrotator widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -73,7 +73,7 @@ class Divider extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the list of categories the divider widget belongs to.
+	 * Retrieve the list of categories the textrotator widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -85,7 +85,20 @@ class Divider extends \Elementor\Widget_Base {
 	}
 
 	/**
-	 * Register divider widget controls.
+	 * Retrieve the list of scripts.
+	 *
+	 * @access public
+	 *
+	 * @return array Widget scripts dependencies.
+	 */
+	public function get_script_depends() {
+		return array(
+			'jquery-simple-text-rotator',
+		);
+	}
+
+	/**
+	 * Register textrotator widget controls.
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
 	 *
@@ -161,7 +174,7 @@ class Divider extends \Elementor\Widget_Base {
 
 
 
-    /*
+	/*
 	*==================================================================================
 	*
 	*=============================== Widget Output ====================================
@@ -170,7 +183,7 @@ class Divider extends \Elementor\Widget_Base {
 	*/
 
 	/**
-	 * Render divider widget output on the frontend.
+	 * Render textrotator widget output on the frontend.
 	 *
 	 * Written in PHP and used to generate the final HTML.
 	 *
@@ -181,11 +194,18 @@ class Divider extends \Elementor\Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 
-		$html = wp_divider_get( $settings['url'] );
+		$this->add_render_attribute(
+			'textrotator',
+			array(
+				'class' => array(
+					'tk-textrotator-' . $this->get_id(),
+					'textrotator-elementor-widget',
+				),
+				'id'    => 'tk-textrotator-' . $this->get_id(),
+			),
+		);
 
-		echo '<div class="divider-elementor-widget">';
-
-		echo ( $html ) ? wp_kses_post( $html ) : esc_url( $settings['url'] );
+		echo '<div  ' . $this->get_render_attribute_string( 'textrotator' ) . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 
 		echo '</div>';
 
